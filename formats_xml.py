@@ -20,9 +20,10 @@ for item in titles:
 
 longwordslist =[]
 for item in jointnewslist:
+  low_reg_words = item.lower()
   wordlength = len(item)
   if wordlength > 6:
-    longwordslist.append(item)
+        longwordslist.append(low_reg_words)
 
 import collections
 

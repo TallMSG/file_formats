@@ -1,27 +1,15 @@
 import json
 from pprint import pprint
 
+newslist = []
 with open('files/newsafr.json', encoding="utf-8") as datafile:
   json_data = json.load(datafile)
+  articles_qty = len(json_data['rss']['channel']['items'])
 
+  for article in range(0, articles_qty):
+    text = json_data['rss']['channel']['items'][article]['description'].split(' ')
+    newslist.append(text)
 
-dict1 = {}
-for k, v in json_data.items():
-  dict1 = v
-
-dict2 = {}
-for k, v in dict1.items():
-  dict2 = dict1["channel"]
-
-list3 = []
-for k, v in dict2.items():
-  list3 = dict2["items"]
-
-newslist = []
-for i in list3:
-  newscontent = i["description"]
-  wordlist = newscontent.split()
-  newslist.append(wordlist)
 
 jointnewslist = []
 for item in newslist:
@@ -30,9 +18,11 @@ for item in newslist:
 
 longwordslist =[]
 for item in jointnewslist:
+  low_reg_words = item.lower()
   wordlength = len(item)
   if wordlength > 6:
-    longwordslist.append(item)
+        longwordslist.append(low_reg_words)
+
 
 import collections
 
